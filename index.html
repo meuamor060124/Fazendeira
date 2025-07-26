@@ -128,64 +128,57 @@
   <footer>
     Meu amor, saiba que vou estar aqui para o que der e vier. Te amo.
   </footer>
+<script>
+  const slides = document.getElementById("slides");
+  const totalSlides = slides.children.length;
+  let index = 0;
 
-  <script>
-    const slides = document.getElementById("slides");
-    const totalSlides = slides.children.length;
-    let index = 0;
+  setInterval(() => {
+    index = (index + 1) % totalSlides;
+    slides.style.transform = `translateX(-${index * 100}%)`;
+  }, 3000);
 
-    setInterval(() => {
-      index = (index + 1) % totalSlides;
-      slides.style.transform = `translateX(-${index * 100}%)`;
-    }, 3000);
+  const timerEl = document.getElementById('timer');
+  const startDate = new Date('2024-01-06T00:00:00');
 
-    const timerEl = document.getElementById('timer');
-    const startDate = new Date('2024-01-06T00:00:00');
+  function updateTimer() {
+    const now = new Date();
+    let start = new Date(startDate);
 
-    function updateTimer() {
-      const now = new Date();
-      let start = new Date(startDate);
+    let years = now.getFullYear() - start.getFullYear();
+    let months = now.getMonth() - start.getMonth();
+    let days = now.getDate() - start.getDate();
+    let hours = now.getHours() - start.getHours();
+    let minutes = now.getMinutes() - start.getMinutes();
+    let seconds = now.getSeconds() - start.getSeconds();
 
-      let years = now.getFullYear() - start.getFullYear();
-      let months = now.getMonth() - start.getMonth();
-      let days = now.getDate() - start.getDate();
-      let hours = now.getHours() - start.getHours();
-      let minutes = now.getMinutes() - start.getMinutes();
-      let seconds = now.getSeconds() - start.getSeconds();
-
-      if (seconds < 0) {
-        seconds += 60;
-        minutes--;
-      }
-      if (minutes < 0) {
-        minutes += 60;
-        hours--;
-      }
-      if (hours < 0) {
-        hours += 24;
-        days--;
-      }
-      if (days < 0) {
-        months--;
-        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-        days += prevMonth.getDate();
-      }
-      if (months < 0) {
-        months += 12;
-        years--;
-      }
-
-      timerEl.textContent = `Juntos há: ${years} ano(s), ${months} mês(es), ${days} dia(s), ${hours}h ${minutes}min ${seconds}s 💖`;
+    if (seconds < 0) {
+      seconds += 60;
+      minutes--;
+    }
+    if (minutes < 0) {
+      minutes += 60;
+      hours--;
+    }
+    if (hours < 0) {
+      hours += 24;
+      days--;
+    }
+    if (days < 0) {
+      months--;
+      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+      days += prevMonth.getDate();
+    }
+    if (months < 0) {
+      months += 12;
+      years--;
     }
 
-    updateTimer();
-    setInterval(updateTimer, 1000);
-  }
+    timerEl.textContent = `Juntos há: ${years} ano(s), ${months} mês(es), ${days} dia(s), ${hours}h ${minutes}min ${seconds}s 💖`;
+  }
 
-  updateTimer(); // Chamada inicial
-  setInterval(updateTimer, 1000); // Atualiza a cada segundo
-
-  
-  </script>
+  updateTimer(); // Chamada inicial
+  setInterval(updateTimer, 1000); // Atualiza a cada segundo
+</script>
 </body>
-</html>
+  
