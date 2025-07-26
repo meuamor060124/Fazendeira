@@ -134,7 +134,7 @@
 
   <div class="message">
     <p>Desde o momento que te conheci, minha vida ganhou cor, sentido e amor. Obrigado por estar ao meu lado. Cada segundo com você vale mais que tudo. ❤️</p>
-    <p class="note">Toque na tela para ativar a música 🎵</p>
+    <p class="note">Toque, role ou interaja para ativar a música 🎵</p>
   </div>
 
   <footer>
@@ -186,15 +186,25 @@
     updateTimer();
     setInterval(updateTimer, 1000);
 
-    // Tocar música após interação do usuário
-    document.addEventListener("click", () => {
+    // Ativar música com qualquer interação do usuário
+    function ativarMusica() {
       const music = document.getElementById("bg-music");
       music.muted = false;
       music.volume = 0.5;
       music.play().catch((e) => {
         console.log("Erro ao tocar música:", e);
       });
-    }, { once: true });
+
+      document.removeEventListener("click", ativarMusica);
+      document.removeEventListener("scroll", ativarMusica);
+      document.removeEventListener("touchstart", ativarMusica);
+      document.removeEventListener("keydown", ativarMusica);
+    }
+
+    document.addEventListener("click", ativarMusica);
+    document.addEventListener("scroll", ativarMusica);
+    document.addEventListener("touchstart", ativarMusica);
+    document.addEventListener("keydown", ativarMusica);
   </script>
 
 </body>
