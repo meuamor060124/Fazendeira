@@ -9,6 +9,7 @@
       height: auto;
       min-height: 100vh;
     }
+
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -84,6 +85,12 @@
       border-top-right-radius: 20px;
     }
 
+    .note {
+      margin-top: 10px;
+      font-size: 0.95em;
+      color: #8b0000;
+    }
+
     audio {
       display: none;
     }
@@ -93,7 +100,7 @@
         font-size: 1.6em;
       }
       .carousel {
-        height: 450px;
+        height: 400px;
       }
       .message {
         font-size: 1em;
@@ -105,6 +112,7 @@
   </style>
 </head>
 <body>
+
   <header>
     <h1>Para o Amor da Minha Vida 💕</h1>
     <div class="timer" id="timer">
@@ -126,16 +134,18 @@
 
   <div class="message">
     <p>Desde o momento que te conheci, minha vida ganhou cor, sentido e amor. Obrigado por estar ao meu lado. Cada segundo com você vale mais que tudo. ❤️</p>
+    <p class="note">Toque na tela para ativar a música 🎵</p>
   </div>
 
   <footer>
     Meu amor, saiba que vou estar aqui para o que der e vier. Te amo.
   </footer>
 
-  <!-- MÚSICA DE FUNDO -->
-  <audio id="bg-music" src="musica.mp3" autoplay loop></audio>
+  <!-- Música com autoplay muted -->
+  <audio id="bg-music" src="musica.mp3" autoplay loop muted></audio>
 
   <script>
+    // Carrossel automático
     const slides = document.getElementById("slides");
     const totalSlides = slides.children.length;
     let index = 0;
@@ -145,6 +155,7 @@
       slides.style.transform = `translateX(-${index * 100}%)`;
     }, 3000);
 
+    // Contador de tempo juntos
     const timerEl = document.getElementById('timer');
     const startDate = new Date('2024-01-06T00:00:00');
 
@@ -159,272 +170,32 @@
       let minutes = now.getMinutes() - start.getMinutes();
       let seconds = now.getSeconds() - start.getSeconds();
 
-      if (seconds < 0) {
-        seconds += 60;
-        minutes--;
-      }
-      if (minutes < 0) {
-        minutes += 60;
-        hours--;
-      }
-      if (hours < 0) {
-        hours += 24;
-        days--;
-      }
+      if (seconds < 0) { seconds += 60; minutes--; }
+      if (minutes < 0) { minutes += 60; hours--; }
+      if (hours < 0) { hours += 24; days--; }
       if (days < 0) {
         months--;
         const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
         days += prevMonth.getDate();
       }
-      if (months < 0) {
-        months += 12;
-        years--;
-      }
+      if (months < 0) { months += 12; years--; }
 
       timerEl.textContent = `Juntos há: ${years} ano(s), ${months} mês(es), ${days} dia(s), ${hours}h ${minutes}min ${seconds}s 💖`;
     }
 
-    updateTimer(); // Chamada inicial
-    setInterval(updateTimer, 1000); // Atualiza a cada segundo
+    updateTimer();
+    setInterval(updateTimer, 1000);
 
-    // Tentar tocar a música automaticamente após o carregamento
-    window.addEventListener('DOMContentLoaded', () => {
+    // Tocar música após interação do usuário
+    document.addEventListener("click", () => {
       const music = document.getElementById("bg-music");
-      music.volume = 0.5; // Volume ajustável (0.0 a 1.0)
+      music.muted = false;
+      music.volume = 0.5;
       music.play().catch((e) => {
-        console.log("Autoplay bloqueado. Usuário precisa interagir.");
+        console.log("Erro ao tocar música:", e);
       });
-    });
+    }, { once: true });
+  </script>
 
-    Entrar
-
-Cadastre-se gratuitamente
-Você disse:
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Para o Amor da Minha Vida</title>
-  <style>
-    html, body {
-      height: auto;
-      min-height: 100vh;
-    }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #fff0f5;
-      color: #333;
-      text-align: center;
-    }
-
-    header {
-      padding: 40px 20px;
-      background: #ffb6c1;
-      color: white;
-    }
-
-    header h1 {
-      font-size: 2.2em;
-      margin: 0;
-    }
-
-    .timer {
-      font-size: 1.2em;
-      margin-top: 10px;
-      color: #b22222;
-      background: #fffafa;
-      padding: 15px;
-      border-radius: 10px;
-      display: inline-block;
-      font-weight: bold;
-    }
-
-    .carousel {
-      background-color: lightcoral;
-      position: relative;
-      max-width: 90%;
-      height: 450px;
-      overflow: hidden;
-      border-radius: 20px;
-      margin: 30px auto;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-
-    .slides {
-      display: flex;
-      transition: transform 1.5s ease-in-out;
-      height: 100%;
-    }
-
-    .slides img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      border-radius: 20px;
-      flex-shrink: 0;
-    }
-
-    .message {
-      font-size: 1.1em;
-      margin: 30px auto;
-      max-width: 90%;
-      background: #ffe4e1;
-      padding: 20px;
-      border-radius: 15px;
-    }
-
-    footer {
-      margin-top: 60px;
-      background: #ff69b4;
-      color: white;
-      padding: 20px;
-      font-size: 1em;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
-    }
-
-    audio {
-      display: none;
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.6em;
-      }
-      .carousel {
-        height: 450px;
-      }
-      .message {
-        font-size: 1em;
-      }
-      footer {
-        font-size: 0.95em;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Para o Amor da Minha Vida 💕</h1>
-    <div class="timer" id="timer">
-      Contando nosso tempo juntos... ⏳
-    </div>
-  </header>
-
-  <div class="carousel">
-    <div class="slides" id="slides">
-      <img src="imag1.jpg" alt="Foto 1" />
-      <img src="imag2.jpg" alt="Foto 2" />
-      <img src="imag3.jpg" alt="Foto 3" />
-      <img src="imag4.jpg" alt="Foto 4" />
-      <img src="imag5.jpg" alt="Foto 5" />
-      <img src="imag6.webp" alt="Foto 6" />
-      <img src="imag7.webp" alt="Foto 7" />
-    </div>
-  </div>
-
-  <div class="message">
-    <p>Desde o momento que te conheci, minha vida ganhou cor, sentido e amor. Obrigado por estar ao meu lado. Cada segundo com você vale mais que tudo. ❤️</p>
-  </div>
-
-  <footer>
-    Meu amor, saiba que vou estar aqui para o que der e vier. Te amo.
-  </footer>
-
-  <!-- MÚSICA DE FUNDO -->
-  <audio id="bg-music" src="musica.mp3" autoplay loop></audio>
-    </div>
-    <script>
-  const slides = document.getElementById("slides");
-  const totalSlides = slides.children.length;
-  let index = 0;
-
-  setInterval(() => {
-    index = (index + 1) % totalSlides;
-    slides.style.transform = `translateX(-${index * 100}%)`;
-  }, 3000);
-
-  const timerEl = document.getElementById('timer');
-  const startDate = new Date('2024-01-06T00:00:00');
-
-  function updateTimer() {
-    const now = new Date();
-    let start = new Date(startDate);
-
-    let years = now.getFullYear() - start.getFullYear();
-    let months = now.getMonth() - start.getMonth();
-    let days = now.getDate() - start.getDate();
-    let hours = now.getHours() - start.getHours();
-    let minutes = now.getMinutes() - start.getMinutes();
-    let seconds = now.getSeconds() - start.getSeconds();
-
-    if (seconds < 0) {
-      seconds += 60;
-      minutes--;
-    }
-    if (minutes < 0) {
-      minutes += 60;
-      hours--;
-    }
-    if (hours < 0) {
-      hours += 24;
-      days--;
-    }
-    if (days < 0) {
-      months--;
-      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-      days += prevMonth.getDate();
-    }
-    if (months < 0) {
-      months += 12;
-      years--;
-    }
-
-    timerEl.textContent = `Juntos há: ${years} ano(s), ${months} mês(es), ${days} dia(s), ${hours}h ${minutes}min ${seconds}s 💖`;
-  }
-
-  updateTimer(); // Chamada inicial
-  setInterval(updateTimer, 1000); // Atualiza a cada segundo
-
-  // Tentar tocar a música automaticamente após o carregamento
-  window.addEventListener('DOMContentLoaded', () => {
-    const music = document.getElementById("bg-music");
-    music.volume = 0.5;
-    music.play().catch((e) => {
-      console.log("Autoplay bloqueado. Usuário precisa interagir.");
-    });
-  });
-
-  // Tocar música ao rolar a página
-  let musicStarted = false;
-
-  function tryPlayMusic() {
-    if (!musicStarted) {
-      const music = document.getElementById("bg-music");
-      music.play().then(() => {
-        musicStarted = true;
-      }).catch((e) => {
-        console.log("Ainda bloqueado. Tentando mais tarde...");
-      });
-    }
-  }
-
-  window.addEventListener("scroll", tryPlayMusic);
-
-  // Tocar música ao primeiro clique
-  document.addEventListener("click", function () {
-    const music = document.getElementById("bg-music");
-    music.play().catch((e) => {
-      console.log("Não foi possível reproduzir o áudio:", e);
-    });
-  }, { once: true });
-</script>
-  
-  
 </body>
 </html>
-
-
