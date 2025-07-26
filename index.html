@@ -137,7 +137,7 @@
     setInterval(() => {
       index = (index + 1) % totalSlides;
       slides.style.transform = `translateX(-${index * 100}%)`;
-    }, 2000);
+    }, 3000);
 
     
   const timerEl = document.getElementById('timer');
@@ -154,7 +154,7 @@
     const minutes = Math.floor(diff / 60);
     const seconds = diff % 60;
 
-    timerEl.textContent = `Estamos juntos há: ${days} dias, ${hours}h ${minutes}min ${seconds}s 💖`;
+    timerEl.textContent = `Juntos há: ${days} dias, ${hours}h ${minutes}min ${seconds}s 💖`;
   }
 
   updateTimer(); // Chamada inicial
