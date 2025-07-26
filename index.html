@@ -12,56 +12,89 @@
       color: #333;
       text-align: center;
     }
+
     header {
       padding: 40px 20px;
       background: #ffb6c1;
       color: white;
     }
+
     header h1 {
-      font-size: 2.5em;
+      font-size: 2.2em;
       margin: 0;
     }
+
     .carousel {
       position: relative;
-      max-width: 400px;
-      margin: 40px auto;
-      border-radius: 20px;
+      max-width: 100%;
+      height: 300px; /* Altura fixa para padronizar imagens */
       overflow: hidden;
+      border-radius: 20px;
+      margin: 30px auto;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
+
     .slides {
       display: flex;
-      width: 300%;
-      animation: slide 12s infinite;
+      width: calc(100% * 7); /* 7 imagens */
+      height: 100%;
+      animation: slide 21s infinite;
     }
+
     .slides img {
       width: 100%;
+      height: 100%;
+      flex-shrink: 0;
       object-fit: cover;
     }
+
     @keyframes slide {
-      0%   { margin-left: 0%; }
-      33%  { margin-left: 0%; }
-      44%  { margin-left: -100%; }
-      77%  { margin-left: -100%; }
-      88%  { margin-left: -200%; }
-      100% { margin-left: -200%; }
+      0%     { transform: translateX(0%); }
+      14.28% { transform: translateX(0%); }
+      20%    { transform: translateX(-100%); }
+      34.28% { transform: translateX(-100%); }
+      40%    { transform: translateX(-200%); }
+      54.28% { transform: translateX(-200%); }
+      60%    { transform: translateX(-300%); }
+      74.28% { transform: translateX(-300%); }
+      80%    { transform: translateX(-400%); }
+      88.28% { transform: translateX(-400%); }
+      94%    { transform: translateX(-500%); }
+      100%   { transform: translateX(-600%); }
     }
+
     .message {
-      font-size: 1.2em;
+      font-size: 1.1em;
       margin: 30px auto;
-      max-width: 600px;
+      max-width: 90%;
       background: #ffe4e1;
       padding: 20px;
       border-radius: 15px;
     }
+
     footer {
       margin-top: 60px;
       background: #ff69b4;
       color: white;
       padding: 20px;
-      font-size: 1.1em;
+      font-size: 1em;
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.6em;
+      }
+      .carousel {
+        height: 200px; /* Altura menor em celulares */
+      }
+      .message {
+        font-size: 1em;
+      }
+      footer {
+        font-size: 0.95em;
+      }
     }
   </style>
 </head>
@@ -76,12 +109,9 @@
       <img src="imag2.jpg" alt="Foto 2" />
       <img src="imag3.jpg" alt="Foto 3" />
       <img src="imag4.jpg" alt="Foto 4" />
-     <img src="imag5.jpg" alt="Foto 5" />
-     <img src="imag6.webp" alt="Foto 6" />
-    <img src="imag7.webp" alt="Foto 7" />
-
-
-
+      <img src="imag5.jpg" alt="Foto 5" />
+      <img src="imag6.webp" alt="Foto 6" />
+      <img src="imag7.webp" alt="Foto 7" />
     </div>
   </div>
 
